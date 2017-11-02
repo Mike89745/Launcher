@@ -1,0 +1,14 @@
+﻿<Window x:Class="Launcher_v._1._0.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Launcher_v._1._0"
+        mc:Ignorable="d"
+        Title="Window1" Height="127.731" Width="300">
+    <Grid>
+        <TextBox x:Name="InputBox" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="Cesta" VerticalAlignment="Top" Width="272"/>
+        <Button Content="Přidat novou cestu" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" Width="272" Click="Button_Click"/>
+
+    </Grid>
+</Window>

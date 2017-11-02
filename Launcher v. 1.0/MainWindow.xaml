@@ -4,9 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Launcher_v._1._0"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <ListView x:Name="FilesView" HorizontalAlignment="Left" Height="183" Margin="44,126,0,0" VerticalAlignment="Top" Width="463">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="Vyhledat z cest" HorizontalAlignment="Left" Margin="44,48,0,0" VerticalAlignment="Top" Width="222" Click="Button_Click"/>
+        <Label x:Name="NoFile" Content="" HorizontalAlignment="Left" Margin="44,95,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="222"/>
+        <Button Content="Pridat cestu" HorizontalAlignment="Left" Margin="285,48,0,0" VerticalAlignment="Top" Width="202" Click="Button_Click_1"/>
+        <Button Content="Spustit Soubor" HorizontalAlignment="Left" Margin="285,89,0,0" VerticalAlignment="Top" Width="202" Click="Button_Click_2"/>
     </Grid>
 </Window>
