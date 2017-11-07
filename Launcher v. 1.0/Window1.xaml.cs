@@ -19,9 +19,23 @@ namespace Launcher_v._1._0
     /// </summary>
     public partial class Window1 : Window
     {
-        public Window1()
+        public static bool paths;
+        public static string FullPath;
+        public Window1(bool paths,int Id,string fullpath)
         {
             InitializeComponent();
+            FullPath = fullpath;
+            if (paths)
+            {
+                InputBox.Text = "Cesta";
+                Butter.Content = "Přidat cestu";
+            }
+            else
+            {
+                InputBox.Text = "info";
+                Butter.Content = "Přidat informace";
+                FullPath = fullpath;
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -29,11 +43,19 @@ namespace Launcher_v._1._0
             AddPath(InputBox.Text);
             this.Close();
         }
-        public void AddPath(string path)
+        public void AddPath(string Text)
         {
-            
-            DataSaver DataSave = new DataSaver();
-            DataSave.DataSave(path, "Paths.txt");
+            if (paths)
+            {
+                DataSaver DataSave = new DataSaver("Paths.csv");
+                DataSave.DataSave(Text, "Paths.txt");
+            }
+            else
+            {
+                DataSaver DataSave = new DataSaver("information.csv");
+                DataSave.DataSaveInfo(Text, FullPath, "information.txt");
+            }
+
         }
     }
 }

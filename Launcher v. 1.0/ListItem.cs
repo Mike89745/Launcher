@@ -21,6 +21,7 @@ namespace Launcher_v._1._0
     class ListItem
     {
         public string Nazev { get; set; }
-        
+        public string Informace { get; set; }
+
     }
 }
