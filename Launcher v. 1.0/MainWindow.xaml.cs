@@ -28,19 +28,34 @@ namespace Launcher_v._1._0
         public string fullpath;
         public static List<string> Paths = new List<string>();
         public static List<string> SearchPaths = new List<string>();
+        public static List<string> FilesNames = new List<string>();
         public static int ctr = 0;
         public MainWindow()
         {
             InitializeComponent();
-            var engine = new FileHelperAsyncEngine<Paths>();
-            using (engine.BeginReadFile("Paths.csv"))
+
+            Paths = new List<string>();
+            SearchPaths = new List<string>();
+            FilesNames = new List<string>();
+
+            if (File.Exists("Paths.csv"))
             {
-                foreach (Paths pathss in engine)
+                var engine = new FileHelperAsyncEngine<Paths>();
+                using (engine.BeginReadFile("Paths.csv"))
                 {
-                    path = pathss.FilePaths;
-                    AddItemToPathList(path);
+                    foreach (Paths pathss in engine)
+                    {
+                        path = pathss.FilePaths;
+                        AddItemToPathList(path);
+                    }
                 }
             }
+            else
+            {
+                Window1 main = new Window1(true, 0, "xd");
+                main.Show();
+            }
+            
         }
         public void GetFiles(string path)
         {
@@ -56,7 +71,7 @@ namespace Launcher_v._1._0
                 {
                     dir = new DirectoryInfo(item.FullName);
                     FileInfo[] Files = dir.GetFiles();
-
+                    FilesNames.Add(item.Name);
                     var Exes = Files
                     .Where(items => items.Extension == ".sln")
                     .Select(items => items).ToList();
@@ -68,7 +83,7 @@ namespace Launcher_v._1._0
 
                         if (File.Exists(fullpath))
                         {
-                            AddItemToListView(FileName, fullpath);
+                            AddItemToListView(item.Name, fullpath);
                         }
                         
                     }
@@ -97,11 +112,11 @@ namespace Launcher_v._1._0
                 Header = "Informace",
                 DisplayMemberBinding = new Binding("Informace")
             });
-            FilesView.Items.Add(new ListItem { Nazev = fileName, Informace = GetInfoAt(fullpath)});
+            FilesView.Items.Add(new ListItem { Nazev = fileName, Informace = GetInfoAt(fileName) });
             ctr++;
             
         }
-        public string GetInfoAt(string FilePath)
+        public string GetInfoAt(string fileName)
         {
             string information = " ";
             var engine = new FileHelperAsyncEngine<Info>();
@@ -109,7 +124,7 @@ namespace Launcher_v._1._0
             {
                 foreach (Info info in engine)
                 {
-                    if(info.path == FilePath)
+                    if(info.path == fileName)
                     {
                         information = info.Information;
                     }
@@ -196,15 +211,23 @@ namespace Launcher_v._1._0
             }
             else
             {
-                Window1 main = new Window1(false, FilesView.SelectedIndex, Paths[FilesView.SelectedIndex]);
+                Window1 main = new Window1(false, FilesView.SelectedIndex, FilesNames[FilesView.SelectedIndex]);
                 main.Show();
 
             }
            
         }
-        public void DeletePath()
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            Window2 main = new Window2();
+            this.Close();
+            main.Show();
+        }
+
+        /*public void DeletePath()
         {
             var engine = 
-        }
+        }*/
     }
 }

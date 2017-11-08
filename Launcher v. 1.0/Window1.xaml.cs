@@ -19,13 +19,14 @@ namespace Launcher_v._1._0
     /// </summary>
     public partial class Window1 : Window
     {
-        public static bool paths;
-        public static string FullPath;
-        public Window1(bool paths,int Id,string fullpath)
+        public static bool Paths;
+        public static string FileName;
+        public Window1(bool paths,int Id,string fileName)
         {
             InitializeComponent();
-            FullPath = fullpath;
-            if (paths)
+            FileName = fileName;
+            Paths = paths;
+            if (Paths)
             {
                 InputBox.Text = "Cesta";
                 Butter.Content = "Přidat cestu";
@@ -34,7 +35,7 @@ namespace Launcher_v._1._0
             {
                 InputBox.Text = "info";
                 Butter.Content = "Přidat informace";
-                FullPath = fullpath;
+                FileName = fileName;
             }
         }
 
@@ -45,7 +46,7 @@ namespace Launcher_v._1._0
         }
         public void AddPath(string Text)
         {
-            if (paths)
+            if (Paths)
             {
                 DataSaver DataSave = new DataSaver("Paths.csv");
                 DataSave.DataSave(Text, "Paths.txt");
@@ -53,7 +54,7 @@ namespace Launcher_v._1._0
             else
             {
                 DataSaver DataSave = new DataSaver("information.csv");
-                DataSave.DataSaveInfo(Text, FullPath, "information.txt");
+                DataSave.DataSaveInfo(Text, FileName, "information.txt");
             }
 
         }
