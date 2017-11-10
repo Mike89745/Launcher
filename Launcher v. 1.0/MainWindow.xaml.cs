@@ -23,12 +23,13 @@ namespace Launcher_v._1._0
     /// </summary>
     public partial class MainWindow : Window
     {
-        public string username;
         public string path;
         public string fullpath;
+
         public static List<string> Paths = new List<string>();
         public static List<string> SearchPaths = new List<string>();
         public static List<string> FilesNames = new List<string>();
+
         public static int ctr = 0;
         public MainWindow()
         {
@@ -63,7 +64,7 @@ namespace Launcher_v._1._0
             
             if (Directory.Exists(path))
             {
-                NoSelect.Content = " ";
+               
                 var dir = new DirectoryInfo(path);
 
                 var dicc = dir.GetDirectories();
@@ -93,7 +94,9 @@ namespace Launcher_v._1._0
             }
             else
             {
-                NoSelect.Content = "Cesta Neexisutje: " + path;
+                ErrorMsg("Cesta Neexisutje: " + path);
+
+                
             }
         }
         private void AddItemToListView(string fileName, string fullpath)
@@ -155,7 +158,8 @@ namespace Launcher_v._1._0
             if (ListViewPaths.SelectedIndex == -1)
 
             {
-                NoSelect.Content = "Nebylo nic vybráno ";
+                ErrorMsg("Nebylo nic vybráno.");
+
 
             }
             else
@@ -177,8 +181,8 @@ namespace Launcher_v._1._0
             }
             else
             {
-                NoFile.Content = "Neexistuje: " + path;
-                
+                ErrorMsg("Neexistuje: " + path);
+
             }
         }
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -193,7 +197,7 @@ namespace Launcher_v._1._0
         {
             if (FilesView.SelectedIndex == -1)
             {
-                NoFile.Content = "Nebylo nic vybráno " ;
+                ErrorMsg("Nebylo nic vybráno ");
             }
             else
             {
@@ -206,7 +210,7 @@ namespace Launcher_v._1._0
         {
             if (FilesView.SelectedIndex == -1)
             {
-                NoFile.Content = "Nebylo nic vybráno ";
+                ErrorMsg("Nebylo nic vybráno ");
 
             }
             else
@@ -225,9 +229,51 @@ namespace Launcher_v._1._0
             main.Show();
         }
 
-        /*public void DeletePath()
+        public void DeletePath()
         {
-            var engine = 
-        }*/
+            if (ListViewPaths.SelectedIndex != -1)
+            {
+                List<Paths> cesty = new List<Paths>();
+                var engine = new FileHelperAsyncEngine<Paths>();
+                using (engine.BeginReadFile("Paths.csv"))
+                {
+                    foreach (Paths paths in engine)
+                    {
+                        cesty.Add(paths);
+                    }
+                }
+                cesty.RemoveAt(ListViewPaths.SelectedIndex);
+                var engines = new FileHelperEngine<Paths>();
+
+                engines.WriteFile("Paths.csv", cesty);
+
+                ErrorMsg("Cesta byla smazána.");
+
+                SearchPaths = new List<string>();
+                ListViewPaths.Items.Clear();
+                using (engine.BeginReadFile("Paths.csv"))
+                {
+                    foreach (Paths pathss in engine)
+                    {
+                        AddItemToPathList(pathss.FilePaths);
+                    }
+                }
+            }
+            else
+            {
+                ErrorMsg("Nebyla vybrána cesta.");
+            }
+            
+        }
+        public void ErrorMsg(string msg)
+        {
+            ErrorWindow window = new ErrorWindow(msg);
+            window.Show();
+        }
+
+        private void Button_Click_5(object sender, RoutedEventArgs e)
+        {
+            DeletePath();
+        }
     }
 }

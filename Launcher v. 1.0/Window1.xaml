@@ -7,8 +7,16 @@
         mc:Ignorable="d"
         Title="Window1" Height="127.731" Width="300">
     <Grid>
-        <TextBox x:Name="InputBox" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="Cesta" VerticalAlignment="Top" Width="272"/>
-        <Button x:Name="Butter" Content="Přidat novou cestu" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" Width="272" Click="Button_Click"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBox x:Name="InputBox" Grid.ColumnSpan="2" Margin="5"/>
+        <Button x:Name="Butter" Content="Přidat novou cestu" Grid.Row="1" Grid.Column="1" Margin="3" Click="Button_Click" FontSize="10"/>
 
     </Grid>
 </Window>

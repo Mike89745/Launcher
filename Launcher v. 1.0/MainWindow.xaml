@@ -8,27 +8,38 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="566.667" Width="525">
     <Grid>
-        <ListView x:Name="FilesView" HorizontalAlignment="Left" Height="160" Margin="10,325,0,0" VerticalAlignment="Top" Width="497">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="14*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="14*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <ListView x:Name="FilesView" Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="4" Margin="5">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Vyhledat z cest" HorizontalAlignment="Left" Margin="10,195,0,0" VerticalAlignment="Top" Width="252" Click="Button_Click"/>
-        <Label x:Name="NoFile" Content="" Margin="10,251,10,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="32"/>
-        <Button Content="Pridat cestu" HorizontalAlignment="Left" Margin="403,195,0,0" VerticalAlignment="Top" Width="110" Click="Button_Click_1" RenderTransformOrigin="0.427,0.538"/>
-        <Button Content="Spustit Soubor" HorizontalAlignment="Left" Margin="10,291,0,0" VerticalAlignment="Top" Width="252" Click="Button_Click_2"/>
-        <ListView x:Name="ListViewPaths" HorizontalAlignment="Left" Height="180" Margin="10,10,0,0" VerticalAlignment="Top" Width="497">
+        <Button Content="Vyhledat z cest" Click="Button_Click" Grid.Column="0" Grid.Row="1" Margin="3"/>
+        <Button Content="Pridat cestu" Click="Button_Click_1" Grid.Column="1" Grid.Row="1" Margin="3"/>
+        <Button Content="Spustit Soubor" Click="Button_Click_2" Grid.Column="0" Grid.Row="3" Margin="3"/>
+        <ListView x:Name="ListViewPaths" Grid.ColumnSpan="3" Margin="3">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Přidat Informace" HorizontalAlignment="Left" Margin="267,291,0,0" VerticalAlignment="Top" Width="240" Click="Button_Click_3"/>
-        <Label x:Name="NoSelect" Content=" " HorizontalAlignment="Left" Margin="10,220,0,0" VerticalAlignment="Top" Width="497"/>
-        <Button Content="Odebrat Cestu" HorizontalAlignment="Left" Margin="267,195,0,0" VerticalAlignment="Top" Width="131"/>
-        <Button Content="Menu" HorizontalAlignment="Left" Margin="403,490,0,0" VerticalAlignment="Top" Width="89" Click="Button_Click_4"/>
+        <Button Content="Přidat Informace" Grid.Column="2" Grid.Row="3" Click="Button_Click_3"/>
+        <Button Content="Odebrat Cestu" Grid.Column="2" Grid.Row="1" Click="Button_Click_5"/>
+        <Button Content="Menu" Grid.Column="2" Grid.Row="5" Click="Button_Click_4"/>
     </Grid>
 </Window>

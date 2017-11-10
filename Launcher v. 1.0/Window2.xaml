@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Launcher_v._1._0"
         mc:Ignorable="d"
-        Title="Window2" Height="300" Width="300">
-    <Grid>
-        <Button Content="Vyhledat Exe soubory podle cesty" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top" Width="272" Click="Button_Click"/>
-        <Button Content="Přesunout projekty" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top" Width="272" Click="Button_Click_1"/>
-        <Button Content="Ukončit" HorizontalAlignment="Left" Margin="10,118,0,0" VerticalAlignment="Top" Width="272" Click="Button_Click_2"/>
+        Title="Window2" Height="auto" Width="auto" SizeToContent="WidthAndHeight" MaxWidth="315">
+    <StackPanel>
+        
+        <Button Content="Vyhledat Exe soubory podle cesty" Margin="5" Click="Button_Click"/>
+        <Button Content="Přesunout projekty" Margin="5" Click="Button_Click_1"/>
+        <Button Content="Ukončit" Margin="5" Click="Button_Click_2"/>
 
-    </Grid>
+    </StackPanel>
 </Window>

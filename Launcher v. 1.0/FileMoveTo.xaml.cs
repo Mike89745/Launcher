@@ -33,7 +33,7 @@ namespace Launcher_v._1._0
         public FileMoveTo()
         {
             InitializeComponent();
-
+            Text.Text = "Vyberte cestu k projektům";
             Paths = new List<string>();
             SearchPaths = new List<string>();
             FilesNames = new List<string>();
@@ -81,10 +81,8 @@ namespace Launcher_v._1._0
             if (state)
             {
                 if (PathsList.SelectedIndex == -1)
-
                 {
-                    TextLabel.Content = "Nebyla vybrána cesta. ";
-
+                    ErrorMsg("Nebyla vybrána cesta. ");
                 }
                 else
                 {               
@@ -102,7 +100,7 @@ namespace Launcher_v._1._0
                             }
                         }
                     }
-                    Butt.Content = "Vyberte Projekt k přesunutí";
+                    Text.Text = "Vyberte Projekt k přesunutí a cestu";
                     state = false;                
                 }
             }
@@ -113,28 +111,29 @@ namespace Launcher_v._1._0
                     if (!Directory.Exists(SearchPaths[PathsList.SelectedIndex] + @"\" + FilesNames[ProjectsList.SelectedIndex]))
                     {
                         MoveFiles(Paths[ProjectsList.SelectedIndex], SearchPaths[PathsList.SelectedIndex] + @"\" + FilesNames[ProjectsList.SelectedIndex]);
-                        TextLabel.Content = "Projekt byl přesunut";
+                        ErrorMsg("Projekt byl přesunut");
                     }
                     else
                     {
-                        TextLabel.Content = "Projekt se stejným názvem již existuje";
+                        ErrorMsg("Projekt se stejným názvem již existuje");
+                        
                     }
                 }
                 else
                 {
- 
-                    if (ProjectsList.SelectedIndex == -1)
-                    {
-                        TextLabel.Content = "Nebyl vybrán Projekt.";
-                    }
-                    if (PathsList.SelectedIndex == -1)
-                    {
-                        TextLabel.Content = "Nebyla vybrána cesta.";
-                    }
                     if (PathsList.SelectedIndex == -1 && ProjectsList.SelectedIndex == -1)
                     {
-                        TextLabel.Content = "Nebyla vybrána cesta ani projekt.";
+                        ErrorMsg("Nebyla vybrána cesta ani projekt.");
                     }
+                    else if (ProjectsList.SelectedIndex == -1)
+                    {
+                        ErrorMsg("Nebyl vybrán Projekt.");
+                    }
+                    else if (PathsList.SelectedIndex == -1)
+                    {
+                        ErrorMsg("Nebyla vybrána cesta");
+                    }
+                    
                 }
             }
 
@@ -156,7 +155,7 @@ namespace Launcher_v._1._0
 
             if (Directory.Exists(path))
             {
-                NoSelect.Content = " ";
+                
                 var dir = new DirectoryInfo(path);
 
                 var dicc = dir.GetDirectories();
@@ -168,7 +167,7 @@ namespace Launcher_v._1._0
             }
             else
             {
-                TextLabel.Content = "Cesta Neexisutje: " + path;
+                ErrorMsg("Cesta Neexisutje: " + path);
             }
         }
         private void AddItemToListView(string fileName, string fullpath)
@@ -211,6 +210,11 @@ namespace Launcher_v._1._0
             }
 
             return information;
+        }
+        public void ErrorMsg(string msg)
+        {
+            ErrorWindow window = new ErrorWindow(msg);
+            window.Show();
         }
     }
 }
