@@ -26,22 +26,32 @@ namespace Launcher_v._1._0
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow main = new MainWindow();
-            this.Close();
-            main.Show();
+            ExeStartPage startPage = new ExeStartPage();
+            ContentPage.Content = startPage;
 
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            FileMoveTo main = new FileMoveTo();
-            this.Close();
-            main.Show();
+            FileToMovePage movePage = new FileToMovePage();
+            ContentPage.Content = movePage;
+            ContentPage.MaxHeight = 500;
+        }
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            
+            AddPage page = new AddPage(true, 0, "xd");
+            ContentPage.Content = page;
+            ContentPage.Width = 300;
+            ContentPage.Height = 180;
+            
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             System.Windows.Application.Current.Shutdown();
         }
+
+      
     }
 }

@@ -18,9 +18,9 @@ using System.Diagnostics;
 namespace Launcher_v._1._0
 {
     /// <summary>
-    /// Interakční logika pro FileMoveTo.xaml
+    /// Interakční logika pro FileToMovePage.xaml
     /// </summary>
-    public partial class FileMoveTo : Window
+    public partial class FileToMovePage : Page
     {
         public static int ctr;
 
@@ -30,7 +30,7 @@ namespace Launcher_v._1._0
 
         public static bool state = true;
 
-        public FileMoveTo()
+        public FileToMovePage()
         {
             InitializeComponent();
             Text.Text = "Vyberte cestu k projektům";
@@ -51,31 +51,6 @@ namespace Launcher_v._1._0
                 }
             }
         }
-        private void AddItemToPathList(string fullpath)
-        {
-            SearchPaths.Add(fullpath);
-
-            GridView newGrid = new GridView();
-            PathsList.View = newGrid;
-
-            newGrid.Columns.Add(new GridViewColumn
-            {
-                Header = "Nazev",
-                DisplayMemberBinding = new Binding("Nazev")
-            });
-
-            PathsList.Items.Add(new ListItem { Nazev = fullpath });
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            state = true;
-            Window2 main = new Window2();
-            this.Close();
-            main.Show();
-        }
-
         private void Button_Click1(object sender, RoutedEventArgs e)
         {
             if (state)
@@ -85,7 +60,7 @@ namespace Launcher_v._1._0
                     ErrorMsg("Nebyla vybrána cesta. ");
                 }
                 else
-                {               
+                {
                     string path = SearchPaths[PathsList.SelectedIndex];
                     GetFiles(path);
                     PathsList.Items.Clear();
@@ -101,7 +76,7 @@ namespace Launcher_v._1._0
                         }
                     }
                     Text.Text = "Vyberte Projekt k přesunutí a cestu";
-                    state = false;                
+                    state = false;
                 }
             }
             else
@@ -116,7 +91,7 @@ namespace Launcher_v._1._0
                     else
                     {
                         ErrorMsg("Projekt se stejným názvem již existuje");
-                        
+
                     }
                 }
                 else
@@ -133,9 +108,25 @@ namespace Launcher_v._1._0
                     {
                         ErrorMsg("Nebyla vybrána cesta");
                     }
-                    
+
                 }
             }
+
+        }
+        private void AddItemToPathList(string fullpath)
+        {
+            SearchPaths.Add(fullpath);
+
+            GridView newGrid = new GridView();
+            PathsList.View = newGrid;
+
+            newGrid.Columns.Add(new GridViewColumn
+            {
+                Header = "Nazev",
+                DisplayMemberBinding = new Binding("Nazev")
+            });
+
+            PathsList.Items.Add(new ListItem { Nazev = fullpath });
 
         }
         public void MoveFiles(string SourcePath, string DestPath)
@@ -155,13 +146,13 @@ namespace Launcher_v._1._0
 
             if (Directory.Exists(path))
             {
-                
+
                 var dir = new DirectoryInfo(path);
 
                 var dicc = dir.GetDirectories();
                 foreach (var item in dicc)
                 {
-                     AddItemToListView(item.Name,item.FullName); 
+                    AddItemToListView(item.Name, item.FullName);
                 }
                 ctr = 0;
             }
@@ -215,6 +206,47 @@ namespace Launcher_v._1._0
         {
             ErrorWindow window = new ErrorWindow(msg);
             window.Show();
+        }
+        public void DeletePath()
+        {
+            if (PathsList.SelectedIndex != -1)
+            {
+                List<Paths> cesty = new List<Paths>();
+                var engine = new FileHelperAsyncEngine<Paths>();
+                using (engine.BeginReadFile("Paths.csv"))
+                {
+                    foreach (Paths paths in engine)
+                    {
+                        cesty.Add(paths);
+                    }
+                }
+                cesty.RemoveAt(PathsList.SelectedIndex);
+                var engines = new FileHelperEngine<Paths>();
+
+                engines.WriteFile("Paths.csv", cesty);
+
+                ErrorMsg("Cesta byla smazána.");
+
+                SearchPaths = new List<string>();
+                PathsList.Items.Clear();
+                using (engine.BeginReadFile("Paths.csv"))
+                {
+                    foreach (Paths pathss in engine)
+                    {
+                        AddItemToPathList(pathss.FilePaths);
+                    }
+                }
+            }
+            else
+            {
+                ErrorMsg("Nebyla vybrána cesta.");
+            }
+
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            DeletePath();
         }
     }
 }

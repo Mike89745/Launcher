@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Launcher_v._1._0"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="ErrorWindow" Height="auto" Width="auto" SizeToContent="WidthAndHeight" MaxWidth="300">  
     <StackPanel>
         <TextBlock x:Name="ErrorMsg" TextWrapping="Wrap" Text=" " FontSize="16" FontWeight="Bold" Height="auto" Margin="5"/>

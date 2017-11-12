@@ -4,42 +4,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Launcher_v._1._0"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="566.667" Width="525">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="14*"></RowDefinition>
-            <RowDefinition Height="3*"></RowDefinition>
-            <RowDefinition Height="3*"></RowDefinition>
-            <RowDefinition Height="3*"></RowDefinition>
-            <RowDefinition Height="14*"></RowDefinition>
-            <RowDefinition Height="3*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <ListView x:Name="FilesView" Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="4" Margin="5">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <Button Content="Vyhledat z cest" Click="Button_Click" Grid.Column="0" Grid.Row="1" Margin="3"/>
-        <Button Content="Pridat cestu" Click="Button_Click_1" Grid.Column="1" Grid.Row="1" Margin="3"/>
-        <Button Content="Spustit Soubor" Click="Button_Click_2" Grid.Column="0" Grid.Row="3" Margin="3"/>
-        <ListView x:Name="ListViewPaths" Grid.ColumnSpan="3" Margin="3">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <Button Content="Přidat Informace" Grid.Column="2" Grid.Row="3" Click="Button_Click_3"/>
-        <Button Content="Odebrat Cestu" Grid.Column="2" Grid.Row="1" Click="Button_Click_5"/>
-        <Button Content="Menu" Grid.Column="2" Grid.Row="5" Click="Button_Click_4"/>
-    </Grid>
+        Title="Window2" Height="auto" Width="auto" SizeToContent="WidthAndHeight">
+    <StackPanel Orientation="Horizontal">
+        <StackPanel >
+            <Button Content="Vyhledat Exe soubory podle cesty" Margin="5" Click="Button_Click"/>
+            <Button Content="Přesunout projekty" Margin="5" Click="Button_Click_1"/>
+            <Button Content="Přidat Cestu" Margin="5" Click="Button_Click_3"/>
+            <Button Content="Ukončit" Margin="5" Click="Button_Click_2"/>
+
+        </StackPanel>
+        <Frame x:Name="ContentPage" Width="auto" >
+
+        </Frame>
+    </StackPanel>
 </Window>
+
