@@ -207,46 +207,5 @@ namespace Launcher_v._1._0
             ErrorWindow window = new ErrorWindow(msg);
             window.Show();
         }
-        public void DeletePath()
-        {
-            if (PathsList.SelectedIndex != -1)
-            {
-                List<Paths> cesty = new List<Paths>();
-                var engine = new FileHelperAsyncEngine<Paths>();
-                using (engine.BeginReadFile("Paths.csv"))
-                {
-                    foreach (Paths paths in engine)
-                    {
-                        cesty.Add(paths);
-                    }
-                }
-                cesty.RemoveAt(PathsList.SelectedIndex);
-                var engines = new FileHelperEngine<Paths>();
-
-                engines.WriteFile("Paths.csv", cesty);
-
-                ErrorMsg("Cesta byla smazána.");
-
-                SearchPaths = new List<string>();
-                PathsList.Items.Clear();
-                using (engine.BeginReadFile("Paths.csv"))
-                {
-                    foreach (Paths pathss in engine)
-                    {
-                        AddItemToPathList(pathss.FilePaths);
-                    }
-                }
-            }
-            else
-            {
-                ErrorMsg("Nebyla vybrána cesta.");
-            }
-
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            DeletePath();
-        }
     }
 }

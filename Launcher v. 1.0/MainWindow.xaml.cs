@@ -22,7 +22,7 @@ namespace Launcher_v._1._0
     {
         static FileToMovePage movePage = new FileToMovePage();
         static ExeStartPage startPage = new ExeStartPage();
-        static AddPage page = new AddPage(true, 0, "xd");
+        static AddPage page = new AddPage();
 
         public MainWindow()
         {
@@ -30,8 +30,8 @@ namespace Launcher_v._1._0
             if (!File.Exists("Paths.csv"))
             {
                 ContentPage.Content = page;
-                ContentPage.Width = 300;
-                ContentPage.Height = 180;
+                ContentPage.Width = 325;
+                ContentPage.Height = 300;
                 ErrorMsg("Neexistuje Paths.csv, Přidejte cestu");
             }
         }
@@ -52,8 +52,8 @@ namespace Launcher_v._1._0
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             ContentPage.Content = page;
-            ContentPage.Width = 300;
-            ContentPage.Height = 180;
+            ContentPage.Width = 325;
+            ContentPage.Height = 300;
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)

@@ -33,15 +33,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Button Content="Odebrat cestu" Grid.Column="1" Margin="3" Click="Button_Click_2"/>
-
-        </Grid>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="3*"></RowDefinition>
